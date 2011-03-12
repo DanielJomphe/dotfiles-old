@@ -1,0 +1,102 @@
+[user]
+	name = Daniel Jomphe
+	email = danieljomphe@gmail.com
+[github]
+	user = DanielJomphe
+
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        interactive = auto
+        ui = true
+        pager = true
+
+[color "branch"]
+        current = yellow reverse
+        local = yellow
+        remote = green
+
+[color "diff"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+
+[color "status"]
+        added = yellow
+        changed = green
+        untracked = cyan
+
+[core]
+	editor = emacs
+        pager = less -FRSX
+        whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/dev/dotfiles/.gitignore_global
+
+[diff]
+    renames = copy   # makes the diff much shorter when moving or copying files
+
+[commit]
+    template = ~/dev/dotfiles/.git_commit_template
+
+[alias]
+	ci = commit
+	co = checkout
+	st = status
+	br = branch
+	di = diff
+	pom = push origin master
+	w = whatchanged   # usage example: git w -n5
+	au = add -u       # add all changed (but not new) files to stage (index):
+	# show conflicting merge in gitk:
+	gitkconflict = !gitk --left-right HEAD...MERGE_HEAD
+	# prune all tracking local branches that have been removed from remote:
+	prune-all = !git remote | xargs -n 1 git remote prune
+	# show full history in gitk (including "deleted" branches and stashes)
+	history-all = !gitk --all $( git fsck | awk '/dangling commit/ {print $3}' )
+	# show list of contributors in descending order by number of commits
+	rank = shortlog -sn --no-merges
+	# given a string for an author, try to figure out full name and email:
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	# given any git object, try to show it briefly
+	whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	# Search for a given string in all patches and print commit messages
+	# example: search for any commit that adds or removes string "foobar"
+	#     git searchcommits foobar
+	# example: search commits for string "foobar" in directory src/lib
+	#     git searchcommits foobar src/lib
+	# example: search commits for "foobar", print full diff of commit with 1 line context
+	#     git searchcommits foobar --pickaxe-all -U1 src/lib
+	searchcommits = "!f() { query=\"$1\"; shift; git log -S\"$query\" \"$@\"; }; f \"$@\""
+	l = log
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	lp = log -p
+	lt = log --topo-order
+	ly = log --pretty='tformat:%h %an (%ar): %s' --since=yesterday
+	gl = log --graph
+	# glp = log --graph --pretty=oneline --abbrev-commit
+	glt = log --pretty=format:'%h : %s' --topo-order --graph
+	rl = reflog
+	sb = show-branch
+	brm = branch --merged
+	brnm = branch --no-merged
+	rnc = revert --no-commit
+	com = checkout master 
+	hard = reset --hard
+	me = merge --no-commit --no-ff
+	ls = ls-files
+	pu = pull
+	cp = cherry-pick
+	cpnx = cherry-pick --no-commit -x
+	ds = !git --no-pager diff --stat -M -w
+	changes = log --oneline --reverse
+	# fork = !sh -c 'git rev-list --boundary $1...$2 | grep ^- | cut -c2-'
+	graph = log --graph --oneline --decorate
+	info = config --list
+	pop = !git stash apply && git stash clear
+	staged = diff --cached
+	summary = log --oneline
+	tags = tag -n1 -l
+
+# http://stackoverflow.com/questions/267761/what-does-your-gitconfig-contain
