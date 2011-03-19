@@ -9,8 +9,10 @@ source $DOTFILES/install_functions.sh
 
 #update_submodules
 
+link_with_backup bashlib
 link_with_backup .bashrc
 link_with_backup .bash_profile
+link_with_backup .profile
 link_with_backup .gitconfig
 
 link_with_backup .emacs.d

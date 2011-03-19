@@ -47,6 +47,7 @@
 	br = branch
 	di = diff
 	pom = push origin master
+        pum = pull upstream master
 	w = whatchanged   # usage example: git w -n5
 	au = add -u       # add all changed (but not new) files to stage (index):
 	# show conflicting merge in gitk:
