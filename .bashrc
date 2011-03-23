@@ -10,7 +10,7 @@
 #-------------------------#
 [[ $PATH = *local/bin* ]] || PATH=$PATH:/usr/local/bin
 [[ $- = *i* ]] || return
-source bashlib # http://stuff.lhunath.com/bashlib
+source bashlib  # http://stuff.lhunath.com/bashlib
 
 
 #-------------------------#
@@ -20,6 +20,7 @@ alias noproxy="http_proxy= HTTP_PROXY= https_proxy= HTTPS_PROXY= ftp_proxy= FTP_
 alias rs="rsync --archive --no-owner --verbose --sparse --hard-links --partial --progress"
 alias rsz="rs --compress-level=9 --skip-compress=gz/zip/z/rpm/deb/iso/bz2/t[gb]z/7z/mp[34]/mov/avi/ogg/jpg/jpeg/rar/gif/png/dat"
 alias mvn="nice mvn"
+alias lein="nice lein"
 alias port="sudo nice port"
 alias cp="cp -v"
 alias mv="mv -v"
@@ -33,7 +34,9 @@ alias ll="ls -lh"
 alias l=" ll -a"
 alias df="df -h"
 
-alias "h?=history | grep"
+alias h?="history | grep"
+alias b?="cat $HOME/.bashrc  | grep"
+alias p?="cat $HOME/.profile | grep"
 
 
 #-------------------------#

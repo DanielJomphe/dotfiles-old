@@ -5,9 +5,6 @@
 #
 # Thanks to http://stuff.lhunath.com/.profile
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export EDITOR=/usr/local/bin/emacs
-
 #-------------------------#
 # BASE - UTILITY          #
 #-------------------------#
@@ -43,6 +40,7 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "/usr/X11" ]    && MANPATH="$MANPATH:/usr/X11/share/man"
 [ -d "$EPREFIX"   ]  && MANPATH="$MANPATH:$(source "$EPREFIX/etc/profile.env"; echo "$MANPATH")"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
+
 #-------------------------#
 # BASE - SECURITY         #
 #-------------------------#
