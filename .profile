@@ -38,7 +38,7 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 [ -d "/opt/local" ]  && MANPATH="$MANPATH:/opt/local/share/man:/opt/local/man"
 [ -d "/opt/X11" ]    && MANPATH="$MANPATH:/opt/X11/share/man"
 [ -d "/usr/X11" ]    && MANPATH="$MANPATH:/usr/X11/share/man"
-[ -d "$EPREFIX"   ]  && MANPATH="$MANPATH:$(source "$EPREFIX/etc/profile.env"; echo "$MANPATH")"
+[ -d "$EPREFIX" ]    && MANPATH="$MANPATH:$(source "$EPREFIX/etc/profile.env"; echo "$MANPATH")"
                         MANPATH="$MANPATH:/usr/share/man:/usr/man"
 
 #-------------------------#

@@ -12,7 +12,6 @@
 [[ $- = *i* ]] || return
 source bashlib  # http://stuff.lhunath.com/bashlib
 
-
 #-------------------------#
 # ALIASSES - FILESYSTEM   #
 #-------------------------#
@@ -37,16 +36,6 @@ alias df="df -h"
 alias h?="history | grep"
 alias b?="cat $HOME/.bashrc  | grep"
 alias p?="cat $HOME/.profile | grep"
-
-
-#-------------------------#
-# ALIASSES - APPLICATIONS #
-#-------------------------#
-### AutoJump
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
-fi
-
 
 #-------------------------#
 # ALIASSES - SYSTEM       #
@@ -89,7 +78,6 @@ alias pp="p | less"
 top -u -h >/dev/null 2>&1 && \
     alias top="top -S -u -stats pid,ppid,user,cpu,time,threads,state,rprvt,vprvt,faults,command"
 
-
 #-------------------------#
 # ALIASSES - NETWORKING   #
 #-------------------------#
@@ -98,7 +86,6 @@ alias mtr="mtr -t"
 alias nmap="nmap -v -v -T5"
 alias nmapp="nmap -P0 -A --osscan_limit"
 alias pktstat="sudo pktstat -tBFT"
-
 
 #-------------------------#
 # OS-SPECIFIC             #
@@ -163,7 +150,6 @@ HISTSIZE=
 HISTFILESIZE=
 HISTTIMEFORMAT='%F %T%t'
 
-
 #-------------------------#
 # SHELL - LOOK AND FEEL   #
 #-------------------------#
@@ -225,7 +211,6 @@ fi
 # X Resources.
 #[ "$DISPLAY" -a -f "$HOME/.Xdefaults" ] && \
 #    exists xrdb && xrdb "$HOME/.Xdefaults"
-
 
 #-------------------------#
 # FUNCTIONS - CONVENIENCE #
@@ -310,7 +295,6 @@ portget() {
     cd "${2#*/}"
 }
 
-
 #-------------------------#
 # FUNCTIONS - NETWORKING  #
 #-------------------------#
@@ -353,7 +337,6 @@ svnup() {
     emit "To view the code diff of these updates; execute: svn diff -r$cRev:$nRev $(quote "$@")"
 }
 
-
 #-------------------------#
 # FUNCTIONS - FILE SYSTEM #
 #-------------------------#
@@ -363,7 +346,6 @@ cc() {
             tar --preserve -xvC ${BASH_REMATCH[2]}
 }
 md() { mkdir -p "$@" && cd "$@"; } # create a new (nested) dir and enter it
-
 
 #-------------------------#
 # FUNCTIONS - EVALUATION  #
@@ -394,12 +376,10 @@ int main(int argc, const char* argv[]) {
     fi
 }
 
-
 #-------------------------#
 # FINK ENVIRONMENT        #
 #-------------------------#
 #test -r /sw/bin/init.sh && . /sw/bin/init.sh
-
 
 #-------------------------#
 # STARTUP APPLICATIONS    #
