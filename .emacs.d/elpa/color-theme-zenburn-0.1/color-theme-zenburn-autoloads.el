@@ -3,8 +3,9 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("color-theme-zenburn-pkg.el" "color-theme-zenburn.el")
-;;;;;;  (19927 63173 263945))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/color-theme-zenburn-0.1/color-theme-zenburn-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/color-theme-zenburn-0.1/color-theme-zenburn.el")
+;;;;;;  (19930 48271 843992))
 
 ;;;***
 

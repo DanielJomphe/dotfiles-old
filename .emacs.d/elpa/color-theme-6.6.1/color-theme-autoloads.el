@@ -6,8 +6,9 @@
 ;;;### (autoloads (color-theme-install color-theme-make-snapshot
 ;;;;;;  color-theme-analyze-defun color-theme-print color-theme-install-at-point-for-current-frame
 ;;;;;;  color-theme-install-at-mouse color-theme-describe color-theme-select)
-;;;;;;  "color-theme" "color-theme.el" (19927 62971))
-;;; Generated autoloads from color-theme.el
+;;;;;;  "color-theme" "../../../../../.emacs.d/elpa/color-theme-6.6.1/color-theme.el"
+;;;;;;  (19930 48184))
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/color-theme-6.6.1/color-theme.el
 
 (autoload 'color-theme-select "color-theme" "\
 Displays a special buffer for selecting and installing a color theme.
@@ -120,7 +121,9 @@ frame-parameter settings of previous color themes.
 
 ;;;***
 
-;;;### (autoloads nil nil ("color-theme-pkg.el") (19927 62971 768670))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/color-theme-6.6.1/color-theme-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/color-theme-6.6.1/color-theme.el")
+;;;;;;  (19930 48184 863510))
 
 ;;;***
 
