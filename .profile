@@ -15,6 +15,12 @@ exists() {
 #sudo dtruss -p $$ &>dtruss &
 
 #-------------------------#
+# BASE - DEV              #
+#-------------------------#
+export                  DEV_HOME="$HOME/dev"
+export                  CLOJURESCRIPT_HOME="$DEV_HOME/clojurescript"
+
+#-------------------------#
 # BASE - PATH             #
 #-------------------------#
 export                  PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
@@ -25,6 +31,7 @@ export                  PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
 [ -d "/usr/X11" ]    && PATH="$PATH:/usr/X11/bin"
 [ -d "/opt/java" ]   && PATH="$PATH:/opt/java/bin"
 [ -d "$EPREFIX" ]    && PATH="$PATH:$EPREFIX/usr/sbin:$EPREFIX/usr/bin:$EPREFIX/sbin:$EPREFIX/bin"
+[ -d "$DEV_HOME" ]   && PATH="$PATH:$CLOJURESCRIPT_HOME/bin"
 [ -d "/usr/lib/git-core" ] \
                      && PATH="$PATH:/usr/lib/git-core"
 [ -d "/Developer/usr/bin" ] \
