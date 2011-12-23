@@ -52,6 +52,17 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 3) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
+(global-set-key "\C-c\C-m" 'execute-extended-command)
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-c\C-k" 'kill-region)
+(global-set-key [f5] 'call-last-kbd-macro) ;or in fact keep hitting e
+                                        ;in C-x e
+(global-set-key "\C-h" 'backward-delete-char-untabify)
+(define-key isearch-mode-map "\C-h" 'isearch-delete-char)
+;(global-set-key [(hyper h)] 'help-command) ;no need, F1 is already bound
+
+(defalias 'qrr 'query-replace-regexp)
+
 ;;; -------------------------------------------------------------------------
 ;;; Hooks
 ;;; -------------------------------------------------------------------------
