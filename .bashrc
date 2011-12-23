@@ -30,7 +30,7 @@ else
     alias ls="ls -bFkG"
 fi
 alias ll="ls -lh"
-alias l=" ll -a"
+alias l=" ll -A"
 alias df="df -h"
 
 alias h?="history | grep"
