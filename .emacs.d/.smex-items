@@ -1,0 +1,18 @@
+
+;; ----- smex-history -----
+(
+ iswitchb-mode
+ recover-this-file
+ run-lisp
+ cd
+ 5x5
+ arp
+ dbx
+)
+
+;; ----- smex-data -----
+(
+ (run-lisp . 1)
+ (recover-this-file . 1)
+ (iswitchb-mode . 2)
+)
