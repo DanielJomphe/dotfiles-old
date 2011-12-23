@@ -56,7 +56,10 @@ export                  MANPATH="$HOME/.man:/usr/local/share/man:/usr/local/man"
 #-------------------------#
 # BASE - APPLICATIONS     #
 #-------------------------#
-export EDITOR=$(type -P emacs || type -P vim || type -P vi || type -P nano)
+#export ALTERNATE_EDITOR=emacs
+export EDITOR=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
+#export VISUAL=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
+#alias emacs="emacsclient -n"
 
 #-------------------------#
 # ENVIRONMENT - LOCALE    #

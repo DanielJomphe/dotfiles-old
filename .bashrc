@@ -93,7 +93,7 @@ alias pktstat="sudo pktstat -tBFT"
 if [[ $MACHTYPE = *darwin* ]]; then
     # MAC ----------------#
 
-    alias emacs="Open -a Emacs --args"
+    #alias emacs="/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs"
 
     qview() {
         files=("$@"); i=0
