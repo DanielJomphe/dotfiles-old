@@ -18,7 +18,7 @@ exists() {
 # BASE - DEV              #
 #-------------------------#
 export                  DEV_HOME="$HOME/dev"
-export                  CLOJURESCRIPT_HOME="$DEV_HOME/clojurescript"
+export                  CLOJURESCRIPT_HOME="$DEV_HOME/one/lib/clojurescript"
 
 #-------------------------#
 # BASE - PATH             #
