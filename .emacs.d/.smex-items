@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- iswitchb-mode
- recover-this-file
- run-lisp
- cd
- 5x5
- arp
- dbx
+ clojure-jack-in
+ package-list-packages-no-fetch
+ package-list-packages
+ replace-string
+ eval-buffer
+ describe-variable
+ auto-fill-mode
 )
 
 ;; ----- smex-data -----
@@ -15,4 +15,25 @@
  (run-lisp . 1)
  (recover-this-file . 1)
  (iswitchb-mode . 2)
+ (qrr . 1)
+ (apropos-command . 6)
+ (auto-fill-mode . 4)
+ (describe-variable . 4)
+ (set-fill-column . 1)
+ (clojure-jack-in . 6)
+ (package-list-packages . 2)
+ (project-mode . 1)
+ (project-load-all . 1)
+ (info . 1)
+ (highlight-symbol-mode . 2)
+ (hl-sexp-mode . 1)
+ (pr-despool-ps-print . 1)
+ (package-list-packages-no-fetch . 9)
+ (replace-string . 9)
+ (global-whitespace-newline-mode . 4)
+ (global-whitespace-mode . 1)
+ (hl-line-mode . 7)
+ (global-hl-line-mode . 4)
+ (flyspell-mode . 1)
+ (eval-buffer . 1)
 )

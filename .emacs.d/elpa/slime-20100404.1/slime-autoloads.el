@@ -4,8 +4,9 @@
 
 
 ;;;### (autoloads (slime-hyperspec-lookup slime-connect slime slime-mode
-;;;;;;  slime-lisp-mode-hook) "slime" "slime.el" (19930 34665))
-;;; Generated autoloads from slime.el
+;;;;;;  slime-lisp-mode-hook) "slime" "../../../../../.emacs.d/elpa/slime-20100404.1/slime.el"
+;;;;;;  "e4463a22aa0a0c5ed6fa2d1c4b2c390c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/slime-20100404.1/slime.el
 
 (defvar slime-lisp-modes '(lisp-mode))
 
@@ -70,7 +71,9 @@ A wrapper for `hyperspec-lookup'
 
 ;;;***
 
-;;;### (autoloads nil nil ("slime-pkg.el") (19930 34665 491043))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/slime-20100404.1/slime-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/slime-20100404.1/slime.el")
+;;;;;;  (20236 45945 813210))
 
 ;;;***
 

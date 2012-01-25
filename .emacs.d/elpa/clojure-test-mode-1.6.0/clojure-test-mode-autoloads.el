@@ -3,9 +3,9 @@
 ;;; Code:
 
 
-;;;### (autoloads (clojure-test-mode) "clojure-test-mode" "clojure-test-mode.el"
-;;;;;;  (20210 36878))
-;;; Generated autoloads from clojure-test-mode.el
+;;;### (autoloads (clojure-test-mode) "clojure-test-mode" "../../../../../.emacs.d/elpa/clojure-test-mode-1.6.0/clojure-test-mode.el"
+;;;;;;  "f7b16109a798192b0619d6a5679950be")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/clojure-test-mode-1.6.0/clojure-test-mode.el
 
 (autoload 'clojure-test-mode "clojure-test-mode" "\
 A minor mode for running Clojure tests.
@@ -20,8 +20,9 @@ with a \"test.\" bit on it." (let ((ns (clojure-find-package))) (when (search "t
 
 ;;;***
 
-;;;### (autoloads nil nil ("clojure-test-mode-pkg.el") (20210 36878
-;;;;;;  988899))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/clojure-test-mode-1.6.0/clojure-test-mode-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/clojure-test-mode-1.6.0/clojure-test-mode.el")
+;;;;;;  (20236 45958 995218))
 
 ;;;***
 

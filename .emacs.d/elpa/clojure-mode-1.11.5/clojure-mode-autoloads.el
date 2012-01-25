@@ -4,8 +4,9 @@
 
 
 ;;;### (autoloads (clojure-enable-slime-on-existing-buffers clojure-jack-in
-;;;;;;  clojure-mode) "clojure-mode" "clojure-mode.el" (20210 36186))
-;;; Generated autoloads from clojure-mode.el
+;;;;;;  clojure-mode) "clojure-mode" "../../../../../.emacs.d/elpa/clojure-mode-1.11.5/clojure-mode.el"
+;;;;;;  "9c93dc780bfc3694a8fd265302dca49f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/clojure-mode-1.11.5/clojure-mode.el
 
 (autoload 'clojure-mode "clojure-mode" "\
 Major mode for editing Clojure code - similar to Lisp mode.
@@ -37,7 +38,9 @@ if that value is non-nil.
 
 ;;;***
 
-;;;### (autoloads nil nil ("clojure-mode-pkg.el") (20210 36186 319525))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/clojure-mode-1.11.5/clojure-mode-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/clojure-mode-1.11.5/clojure-mode.el")
+;;;;;;  (20236 45850 938359))
 
 ;;;***
 
