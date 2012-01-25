@@ -19,7 +19,7 @@
 ;;; -------------------------------------------------------------------------
 
 (set-face-attribute 'default nil :family "menlo")
-(set-face-attribute 'default nil :height 180)
+(set-face-attribute 'default nil :height 150)
 
 ;(add-to-list 'initial-frame-alist `(fullscreen . fullheight))
 ;(add-to-list 'default-frame-alist `(fullscreen . fullheight))
@@ -37,13 +37,14 @@
 
   (setq-default cursor-type 'bar)
   (set-cursor-color "#ff0000")
+  ;; TODO conditionalize the following
   (ns-toggle-fullscreen))
 
 (defun dj-init-windows ()
   (delete-other-windows)
   (switch-to-buffer "*scratch*")
   (split-window-horizontally -80)
-  (split-window-horizontally 80)
+  (split-window-horizontally  80)
   (split-window-vertically))
 
 (setq initial-scratch-message nil)
