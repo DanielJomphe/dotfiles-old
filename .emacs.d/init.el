@@ -64,23 +64,27 @@
 (defalias 'qrr 'query-replace-regexp)
 
 ;;; -------------------------------------------------------------------------
+;;; Global modes
+;;; -------------------------------------------------------------------------
+
+(global-whitespace-mode)
+(global-hl-sexp-mode)
+
+;;; -------------------------------------------------------------------------
 ;;; Hooks
 ;;; -------------------------------------------------------------------------
 
+;;; prog-mode-hook is defined in Emacs Starter Kit
+(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
+(add-hook 'prog-mode-hook 'highlight-symbol-mode)
+
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'emacs-lisp-mode-hook 'highlight-parentheses-mode)
-(add-hook 'emacs-lisp-mode-hook 'highlight-symbol-mode)
-
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
-(add-hook 'clojure-mode-hook 'highlight-symbol-mode)
-
+(add-hook 'clojure-mode-hook    'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
-(add-hook 'slime-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'slime-repl-mode-hook 'highlight-parentheses-mode)
-(add-hook 'slime-repl-mode-hook 'highlight-symbol-mode)
+
 (add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
 
 (defun clojure-slime-maybe-compile-and-load-file ()
