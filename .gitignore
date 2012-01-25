@@ -2,3 +2,5 @@
 .emacs.d/backups/
 .emacs.d/elpa/archives/
 .emacs.d/places
+.emacs.d/.smex-items
+.emacs.d/url/cookies
