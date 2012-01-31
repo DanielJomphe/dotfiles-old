@@ -4,6 +4,50 @@
 (package-initialize)
 
 ;;; -------------------------------------------------------------------------
+;;; Auto-install my packages when needed!
+;;; -------------------------------------------------------------------------
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar my-packages
+  '(starter-kit
+    starter-kit-bindings
+    starter-kit-eshell
+    starter-kit-js
+    starter-kit-lisp
+    clojure-mode
+    clojure-project-mode
+    clojure-test-mode
+    clojurescript-mode
+    color-theme
+    durendal
+    elein
+    elisp-slime-nav
+    find-file-in-project
+    highlight-parentheses
+    highlight-symbol
+    hl-sexp
+    htmlize
+    idle-highlight-mode
+    ido-ubiquitous                     ; I think this one comes in ESK
+    levenshtein
+    magit                              ; I think this one comes in ESK
+    magit-simple-keys
+    paredit                            ; I think this one comes in ESK
+    project-mode
+    rainbow-delimiters
+    scpaste                            ; I think this one comes in ESK
+    slime                              ; I think this one comes in ESK
+    smex                               ; I think this one comes in ESK
+    )
+  "A list of packages to ensure are installed at launch.")
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+;;; -------------------------------------------------------------------------
 ;;; Loads
 ;;; -------------------------------------------------------------------------
 
@@ -32,15 +76,22 @@
 ;(load-theme 'solarized t)
 
 (defun dj-init ()
+  (interactive)
   (load "color-theme-solarized")
   (color-theme-solarized-dark)
-
-  (setq-default cursor-type 'bar)
-  (set-cursor-color "#ff0000")
   ;; TODO conditionalize the following
-  (ns-toggle-fullscreen))
+  (ns-toggle-fullscreen)
+  (split-window-horizontally)
+  (server-start))
 
-(defun dj-init-windows ()
+(dj-init)
+
+(defun dj-init-manual ()
+  (interactive)
+  (setq-default cursor-type 'bar)
+  (set-cursor-color "#ff0000"))
+
+(defun dj-init-windows ()               ;no more used nowadays...
   (delete-other-windows)
   (switch-to-buffer "*scratch*")
   (split-window-horizontally -80)
@@ -54,15 +105,16 @@
 (setq mouse-wheel-progressive-speed nil)
 
 (global-set-key "\C-c\C-m" 'execute-extended-command)
-(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-\M-h" 'backward-kill-word)
 (global-set-key "\C-c\C-k" 'kill-region)
-(global-set-key [f5] 'call-last-kbd-macro) ;or in fact keep hitting e
-                                        ;in C-x e
+(global-set-key [f5] 'call-last-kbd-macro) ;or keep hitting e in C-x e
 (global-set-key "\C-h" 'backward-delete-char-untabify)
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
 ;(global-set-key [(hyper h)] 'help-command) ;no need, F1 is already bound
 
 (defalias 'qrr 'query-replace-regexp)
+
+(global-set-key (kbd "C-c C-j") 'clojure-jack-in)
 
 ;;; -------------------------------------------------------------------------
 ;;; Global modes
@@ -72,14 +124,10 @@
 (global-hl-sexp-mode)
 
 ;;; -------------------------------------------------------------------------
-;;; Local modes
+;;; Local modes & hooks
 ;;; -------------------------------------------------------------------------
 
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
-
-;;; -------------------------------------------------------------------------
-;;; Hooks
-;;; -------------------------------------------------------------------------
 
 ;;; prog-mode-hook is defined in Emacs Starter Kit
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
@@ -92,11 +140,121 @@
 (add-hook 'clojure-mode-hook    'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
 
-(add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+(add-hook 'slime-repl-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'slime-repl-mode-hook 'highlight-parentheses-mode)
+(add-hook 'slime-repl-mode-hook 'highlight-symbol-mode)
 
-(defun clojure-slime-maybe-compile-and-load-file ()
-  (when (and (eq major-mode 'clojure-mode)
-             (slime-connected-p))
+(add-hook 'slime-repl-mode-hook
+          (lambda ()
+            (font-lock-mode nil)
+            (clojure-mode-font-lock-setup)
+            (font-lock-mode t)))
+
+;;; -------------------------------------------------------------------------
+;;; Clojure Utilities - Durendal 0.2 didn't work; let's verbatim what works
+;;; -------------------------------------------------------------------------
+
+;;; In fact, nothing here seems to work :/
+
+;;; AUTO-COMPILE ON SAVE
+(defvar durendal-auto-compile? t
+  "Automatically compile on save when applicable.")
+
+(defun durendal-in-current-project? (file)
+  (let ((root (expand-file-name
+               (read (cadr (slime-eval
+                            '(swank:eval-and-grab-output
+                              "(System/getProperty \"user.dir\")")))))))
+    (string= (substring file 0 (length root)) root)))
+
+(defun durendal-auto-compile ()
+  (when (and slime-mode durendal-auto-compile?
+             (slime-connected-p) (slime-current-package)
+             (durendal-in-current-project? buffer-file-name))
     (slime-compile-and-load-file)))
 
-(add-hook 'after-save-hook 'clojure-slime-maybe-compile-and-load-file)
+(defun durendal-enable-auto-compile ()
+  (make-local-variable 'after-save-hook)
+  (add-hook 'after-save-hook 'durendal-auto-compile))
+
+;;; FONT FACES
+(defun durendal-slime-repl-paredit ()
+  (require 'paredit)
+  (define-key slime-repl-mode-map
+    (kbd "DEL") 'paredit-backward-delete)
+  (define-key slime-repl-mode-map
+    (kbd "{") 'paredit-open-curly)
+  (define-key slime-repl-mode-map
+    (kbd "}") 'paredit-close-curly)
+  (modify-syntax-entry ?\{ "(}")
+  (modify-syntax-entry ?\} "){")
+  (modify-syntax-entry ?\[ "(]")
+  (modify-syntax-entry ?\] ")[")
+  (modify-syntax-entry ?~ "'   ")
+  (modify-syntax-entry ?, "    ")
+  (modify-syntax-entry ?^ "'")
+  (modify-syntax-entry ?= "'")
+  (paredit-mode t))
+
+(defadvice slime-repl-emit (after durendal-slime-repl-emit-ad)
+  (with-current-buffer (slime-output-buffer)
+    (add-text-properties slime-output-start slime-output-end
+                         '(font-lock-face slime-repl-output-face
+                                          rear-nonsticky (font-lock-face)))))
+
+(defadvice slime-repl-insert-prompt (after durendal-slime-repl-prompt-ad)
+  (with-current-buffer (slime-output-buffer)
+    (let ((inhibit-read-only t))
+      (add-text-properties slime-repl-prompt-start-mark (point-max)
+                           '(font-lock-face slime-repl-prompt-face
+                                            rear-nonsticky
+                                            (slime-repl-prompt
+                                             read-only
+                                             font-lock-face
+                                             intangible))))))
+
+(defun durendal-enable-slime-repl-font-lock ()
+  (add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+  (ad-activate #'slime-repl-emit)
+  (ad-activate #'slime-repl-insert-prompt))
+
+(defun durendal-disable-slime-repl-font-lock ()
+  (remove-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+  (ad-deactivate #'slime-repl-emit)
+  (ad-deactivate #'slime-repl-insert-prompt))
+
+(defun durendal-enable ()
+  "Enable hooks for all durendal functionality."
+  (add-hook 'slime-connected-hook
+            (lambda ()
+              (if (equal (slime-lisp-implementation-name) "clojure")
+                  (progn
+                    (add-hook 'clojure-mode-hook
+                              'durendal-enable-auto-compile)
+                    (add-hook 'slime-repl-mode-hook
+                              'durendal-slime-repl-paredit)
+                    (durendal-enable-slime-repl-font-lock))
+                  (progn
+                    (remove-hook 'clojure-mode-hook
+                                 'durendal-enable-auto-compile)
+                    (remove-hook 'slime-repl-mode-hook
+                                 'durendal-slime-repl-paredit)
+                    (durendal-disable-slime-repl-font-lock))))))
+
+(durendal-enable)
+
+;;; -------------------------------------------------------------------------
+;;; Utilities
+;;; -------------------------------------------------------------------------
+
+;; thanks johnw: https://gist.github.com/1198329
+(defun find-grep-in-project (command-args)
+  (interactive
+   (progn
+     (list (read-shell-command "Run find (like this): "
+                               '("git ls-files -z | xargs -0 egrep -nH -e " . 41)
+                               'grep-find-history))))
+  (when command-args
+    (let ((null-device nil)) ; see grep
+      (grep command-args))))
+
