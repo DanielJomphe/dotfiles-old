@@ -10,7 +10,7 @@
 #-------------------------#
 [[ $PATH = *local/bin* ]] || PATH=$PATH:/usr/local/bin
 [[ $- = *i* ]] || return
-source bashlib  # http://stuff.lhunath.com/bashlib
+source $HOME/bashlib  # http://stuff.lhunath.com/bashlib
 
 #-------------------------#
 # ALIASSES - FILESYSTEM   #
@@ -184,13 +184,6 @@ if (( EUID )); then
 else
     PS1='\[$reset$bold$red\]'$PS1
 fi
-forcePS1ToFront() {
-    origExitCode=$?
-    read r c < <(cloc)
-    (( c > 1 )) && printf '\n' >&2
-    return $origExitCode
-}
-PS1='$(forcePS1ToFront)'$PS1 # Put the prompt on a new line if the cursor isn't in the beginning of the line.
 #PS1='\[$reset$bold$green\]\u@\h\[$blue\] \W \[$green\]$(: "${?#0}"; printf "\[%s\]" "${_:+$save$red\r$_ $load}")\$\[$reset\] '
 
 # Colors
