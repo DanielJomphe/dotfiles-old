@@ -20,7 +20,6 @@ alias rs="rsync --archive --no-owner --verbose --sparse --hard-links --partial -
 alias rsz="rs --compress-level=9 --skip-compress=gz/zip/z/rpm/deb/iso/bz2/t[gb]z/7z/mp[34]/mov/avi/ogg/jpg/jpeg/rar/gif/png/dat"
 alias mvn="nice mvn"
 alias lein="nice lein"
-alias port="sudo nice port"
 alias cp="cp -v"
 alias mv="mv -v"
 alias tree="tree -F --dirsfirst"
@@ -93,14 +92,12 @@ alias pktstat="sudo pktstat -tBFT"
 if [[ $MACHTYPE = *darwin* ]]; then
     # MAC ----------------#
 
-    #alias emacs="/usr/local/Cellar/emacs/HEAD/Emacs.app/Contents/MacOS/Emacs"
-
     qview() {
         files=("$@"); i=0
         while true; do
             file=${files[i]}
             qlmanage -p "$file" & pid=$!
-            
+
             read -sn1 key
             kill $pid || key=q
             wait $pid
@@ -167,8 +164,6 @@ stty -echoctl
 
 #[[ -f /etc/bash_completion ]] && \
 #    source /etc/bash_completion
-#[[ -f ~/.share/git-svn-extensions/source.sh ]] && \
-#    source ~/.share/git-svn-extensions/source.sh
 
 # Terminal title for xterm/rxvt/screen.
 case "$SHELL" in
@@ -231,7 +226,7 @@ d() {
 }
 rerun() {
     local h history histories dialogMenu=() startIndex
-    
+
     # Load in history entries (ignoring the last)
     IFS=$'\n' read -r -d '' -a histories < <(history | tail -n "${1:-10}")
     unset histories[${#histories[@]}-1]
@@ -263,12 +258,6 @@ cwatch() {
         clear && echo "$o"
     done
 }
-mvns() {
-    export PATH=/usr/local/share/soylatte16-amd64-1.0.3/bin:${PATH}
-    export JAVA_HOME=/usr/local/share/soylatte16-amd64-1.0.3
-
-    mvn "$@"
-}
 mvnroot() {
     local p=$PWD c=${1:-1}
     until p=${p%/*}; [[ -e "$p/pom.xml" ]] && (( --c <= 0 )); do :; done
@@ -282,19 +271,6 @@ gf() {
 gdm() {
     emit "GIT Daemon starting with base path: $(shorten "$PWD")"
     git daemon --base-path=. "$@" &
-}
-git-redo-move() {
-    (( $# == 2 ))   || { emit -r "Expected two parameters; [source] [destination]."; return; }
-    [[ -e $2 ]]     || { emit -r "$2 doesn't exist, can't redo move."; return; }
-    [[ ! -e $1 ]]   || { emit -r "$1 exists, don't want to overwrite, aborting redo move."; return; }
-    mkdir -p "${1%/*}" && \mv "$2" "$1" && git mv "$1" "$2" && rmdir -p "${1%/*}"
-}
-portget() {
-    (( $# )) || { emit -r "$0 [revision] [category/portname]"; return; }
-
-    [[ -e "${2#*/}" ]] && { ask -Ny! 'Target exists, delete?' && rm -rf "${2#*/}" || return; }
-    svn co -r "$1" http://svn.macports.org/repository/macports/trunk/dports/"$2"
-    cd "${2#*/}"
 }
 
 #-------------------------#
@@ -358,7 +334,7 @@ c() {
     trap 'rm -f "$out"' RETURN
 
     [[ $1 = -l ]] && { strict=; shift; }
-    
+
     local code="
 #include <stdio.h>
 #include <math.h>
@@ -379,17 +355,5 @@ int main(int argc, const char* argv[]) {
 }
 
 #-------------------------#
-# FINK ENVIRONMENT        #
-#-------------------------#
-#test -r /sw/bin/init.sh && . /sw/bin/init.sh
-
-#-------------------------#
 # STARTUP APPLICATIONS    #
 #-------------------------#
-exists todo && todo
-mysqlstart() {
-    sudo bash -c '/opt/local/bin/mysqld_safe5 "$@" &' -- "$@"
-}
-mysqlstop() {
-    /opt/local/bin/mysqladmin5 -u root -p shutdown "$@"
-}

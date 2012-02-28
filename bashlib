@@ -177,31 +177,6 @@ eol() {
 
 
 #  ______________________________________________________________________
-# |__ CLoc ______________________________________________________________|
-#
-#       cloc
-#
-# Outputs the current cursor location as two space-separated numbers: row column
-#
-cloc() {
-    local old=$(stty -g)
-    stty raw
-
-    # If the tty has input waiting then we can't read back its response.  We'd only break and pollute the tty input buffer.
-    read -t 0 < /dev/tty 2>/dev/null && {
-        stty "$old"
-        return 1
-    }
-
-    printf '\e[6n' > /dev/tty
-    IFS='[;' read -dR _ row col < /dev/tty
-    printf '%d %d' "$row" "$col"
-    stty "$old"
-} # _____________________________________________________________________
-
-
-
-#  ______________________________________________________________________
 # |__ Latest ____________________________________________________________|
 #
 #       latest [file...]
