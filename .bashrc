@@ -5,6 +5,10 @@
 #
 # Thanks to http://stuff.lhunath.com/.bashrc
 
+echo ".bashrc       : bash Interactive : Always called."
+
+source $HOME/.mypath
+
 #-------------------------#
 # SHELL - INITIALIZATION  #
 #-------------------------#
@@ -350,3 +354,4 @@ int main(int argc, const char* argv[]) {
 #-------------------------#
 # STARTUP APPLICATIONS    #
 #-------------------------#
+
