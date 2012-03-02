@@ -40,6 +40,7 @@
     scpaste                            ; I think this one comes in ESK
     slime                              ; I think this one comes in ESK
     smex                               ; I think this one comes in ESK
+    markdown-mode
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -149,6 +150,11 @@
             (font-lock-mode nil)
             (clojure-mode-font-lock-setup)
             (font-lock-mode t)))
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(setq auto-mode-alist
+   (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
 ;;; -------------------------------------------------------------------------
 ;;; Clojure Utilities - Durendal 0.2 didn't work; let's verbatim what works
