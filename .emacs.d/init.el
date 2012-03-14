@@ -129,6 +129,7 @@
 ;;; -------------------------------------------------------------------------
 
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\.dtm$"  . clojure-mode))
 
 ;;; prog-mode-hook is defined in Emacs Starter Kit
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
