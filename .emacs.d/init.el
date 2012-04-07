@@ -7,7 +7,7 @@
 ;;; Auto-install my packages when needed!
 ;;; -------------------------------------------------------------------------
 
-(when (not package-archive-contents)
+(if (not package-archive-contents)
   (package-refresh-contents))
 
 (defvar my-packages
@@ -17,30 +17,19 @@
     starter-kit-js
     starter-kit-lisp
     clojure-mode
-    clojure-project-mode
+   ;clojure-project-mode
     clojure-test-mode
     clojurescript-mode
-    color-theme
-    durendal
-    elein
-    elisp-slime-nav
-    find-file-in-project
-    highlight-parentheses
-    highlight-symbol
+    color-theme-sanityinc-tomorrow
+    color-theme-sanityinc-solarized
+   ;elein
     hl-sexp
-    htmlize
-    idle-highlight-mode
-    ido-ubiquitous                     ; I think this one comes in ESK
-    levenshtein
-    magit                              ; I think this one comes in ESK
-    magit-simple-keys
-    paredit                            ; I think this one comes in ESK
-    project-mode
-    rainbow-delimiters
-    scpaste                            ; I think this one comes in ESK
-    slime                              ; I think this one comes in ESK
-    smex                               ; I think this one comes in ESK
+   ;magit-simple-keys
     markdown-mode
+    org
+   ;project-mode
+    rainbow-delimiters
+    undo-tree
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -48,51 +37,55 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;;; The following packages are provided by some starter kit modules:
+;;; * elisp-slime-nav
+;;; * find-file-in-project
+;;; * idle-highlight-mode
+;;; * ido-ubiquitous
+;;; * magit
+;;; * paredit
+;;; * smex
+
 ;;; -------------------------------------------------------------------------
 ;;; Loads
 ;;; -------------------------------------------------------------------------
 
- ; why isn't elpa's color-theme available by now!?
-(add-to-list 'load-path "~/.emacs.d/elpa/color-theme-6.6.1")
-(add-to-list 'load-path "~/.emacs.d/lib")
-(add-to-list 'load-path              "~/dev/solarized/emacs-colors-solarized")
-(add-to-list 'custom-theme-load-path "~/dev/solarized/emacs-colors-solarized/")
-;(add-to-list 'custom-theme-load-path (concat prelude-dir "themes/"))
+;(add-to-list 'load-path "~/.emacs.d/lib") ; nothing in that folder for now.
 
 ;;; -------------------------------------------------------------------------
 ;;; Look & Feel
 ;;; -------------------------------------------------------------------------
 
+;; TODO conditionalize the following
 (set-face-attribute 'default nil :family "menlo")
 (set-face-attribute 'default nil :height 150)
 
+;; TODO conditionalize the following
 ;(add-to-list 'initial-frame-alist `(fullscreen . fullheight))
 ;(add-to-list 'default-frame-alist `(fullscreen . fullheight))
 ;(add-to-list 'default-frame-alist '(left . 0))
 ;(add-to-list 'default-frame-alist '(top . 0))
-;(add-to-list 'default-frame-alist '(height . 50))
+;(add-to-list 'default-frame-alist '(height . 47))
 ;(add-to-list 'default-frame-alist '(width . 155))
 
-;; custom Emacs 24 color themes support
-;(load-theme 'solarized t)
+(color-theme-sanityinc-solarized-light)
+;(color-theme-sanityinc-solarized-dark)
+;(color-theme-sanityinc-tomorrow-day)
+;(color-theme-sanityinc-tomorrow-eighties)
 
-(defun dj-init ()
-  (interactive)
-  (load "color-theme-solarized")
-  (color-theme-solarized-dark)
-  ;; TODO conditionalize the following
-  (ns-toggle-fullscreen)
-  (split-window-horizontally)
-  (server-start))
+;; TODO conditionalize the following
+(ns-toggle-fullscreen)
 
-(dj-init)
+(split-window-horizontally)
+
+(server-start)
 
 (defun dj-init-manual ()
   (interactive)
   (setq-default cursor-type 'bar)
   (set-cursor-color "#ff0000"))
 
-(defun dj-init-windows ()               ;no more used nowadays...
+(defun dj-init-windows ()               ; no more used nowadays...
   (delete-other-windows)
   (switch-to-buffer "*scratch*")
   (split-window-horizontally -80)
@@ -105,15 +98,8 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 3) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
 
-(global-set-key "\C-c\C-m" 'execute-extended-command)
-(global-set-key "\C-\M-h" 'backward-kill-word)
-(global-set-key "\C-c\C-k" 'kill-region)
-(global-set-key [f5] 'call-last-kbd-macro) ;or keep hitting e in C-x e
-(global-set-key "\C-h" 'backward-delete-char-untabify)
+(global-set-key "\C-h" "'backward-delete-char-untabify")
 (define-key isearch-mode-map "\C-h" 'isearch-delete-char)
-;(global-set-key [(hyper h)] 'help-command) ;no need, F1 is already bound
-
-(defalias 'qrr 'query-replace-regexp)
 
 (global-set-key (kbd "C-c C-j") 'clojure-jack-in)
 
@@ -122,7 +108,14 @@
 ;;; -------------------------------------------------------------------------
 
 (global-whitespace-mode)
+
 (global-hl-sexp-mode)
+
+(define-globalized-minor-mode global-rainbow-delimiters-mode
+  rainbow-delimiters-mode
+  (lambda ()
+    (rainbow-delimiters-mode t)))
+(global-rainbow-delimiters-mode t)
 
 ;;; -------------------------------------------------------------------------
 ;;; Local modes & hooks
@@ -134,18 +127,9 @@
 ;;; prog-mode-hook is defined in Emacs Starter Kit
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook 'highlight-parentheses-mode)
-(add-hook 'prog-mode-hook 'highlight-symbol-mode)
-
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook    'paredit-mode)
 (add-hook 'slime-repl-mode-hook 'paredit-mode)
-
-(add-hook 'slime-repl-mode-hook 'rainbow-delimiters-mode)
-(add-hook 'slime-repl-mode-hook 'highlight-parentheses-mode)
-(add-hook 'slime-repl-mode-hook 'highlight-symbol-mode)
-
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (font-lock-mode nil)
@@ -158,13 +142,12 @@
    (cons '("\\.md" . markdown-mode) auto-mode-alist))
 
 ;;; -------------------------------------------------------------------------
-;;; Clojure Utilities - Durendal 0.2 didn't work; let's verbatim what works
+;;; Clojure Utilities - Durendal 0.2 didn't work; let's verbatim what works.
+;;; In fact, not much here seems to work. :/
 ;;; -------------------------------------------------------------------------
 
-;;; In fact, nothing here seems to work :/
-
 ;;; AUTO-COMPILE ON SAVE
-(defvar durendal-auto-compile? t
+(defvar durendal-auto-compile? nil      ; `t` if I want to put it back on
   "Automatically compile on save when applicable.")
 
 (defun durendal-in-current-project? (file)
@@ -264,4 +247,3 @@
   (when command-args
     (let ((null-device nil)) ; see grep
       (grep command-args))))
-
