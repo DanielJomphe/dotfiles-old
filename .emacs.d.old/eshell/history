@@ -1,0 +1,12 @@
+ps
+l
+ll
+ls
+ls -l
+cd ../..
+lein new printably
+cd ..
+source .mypath 
+cd dev/
+lein new printably
+info

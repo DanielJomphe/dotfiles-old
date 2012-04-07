@@ -8,3 +8,13 @@
 .emacs.d/elpa/
 .emacs.d/eshell/
 .emacs.d/swank/
+.emacs.d.old/auto-save-list/
+.emacs.d.old/backups/
+.emacs.d.old/elpa/archives/
+.emacs.d.old/places
+.emacs.d.old/.smex-items
+.emacs.d.old/url/cookies
+.emacs.d.old/.smex-items
+.emacs.d.old/elpa/
+.emacs.d.old/eshell/
+.emacs.d.old/swank/
