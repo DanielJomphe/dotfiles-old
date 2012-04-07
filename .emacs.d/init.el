@@ -93,7 +93,7 @@
   (split-window-vertically))
 
 (setq initial-scratch-message nil)
-(setq initial-buffer-choice "~/.emacs.d/manual.el")
+;(setq initial-buffer-choice "~/.emacs.d/manual.el")
 
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 3) ((control) . nil)))
 (setq mouse-wheel-progressive-speed nil)
