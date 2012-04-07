@@ -10,7 +10,7 @@ echo ".mypath       :  *sh PATH        : Always called."
 export                  DEV_HOME="$HOME/dev"
 export                  CLOJURESCRIPT_HOME="$DEV_HOME/one/lib/clojurescript"
 
-export                  PATH="$HOME/.bin:/usr/local/sbin:/usr/local/bin"
+export                  PATH="$HOME/.bin:$HOME/bin:/usr/local/sbin:/usr/local/bin"
 #[ -d "/sw" ]         && PATH="$PATH:/sw/sbin:/sw/bin"
 #[ -d "/opt/local" ]  && PATH="$PATH:/opt/local/sbin:/opt/local/bin"
                         PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin"
