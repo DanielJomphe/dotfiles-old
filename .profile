@@ -25,7 +25,8 @@ exists() {
 #export ALTERNATE_EDITOR=emacs
 export EDITOR=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
 #export VISUAL=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
-#alias emacs="emacsclient -n"
+alias emacs="emacsclient -n"
+#alias emacs="/usr/local/Cellar/emacs/24.1/Emacs.app/Contents/MacOS/Emacs -nw"
 
 #-------------------------#
 # ENVIRONMENT - LOCALE    #
