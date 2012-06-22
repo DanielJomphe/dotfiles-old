@@ -15,4 +15,6 @@ link_with_backup .gitconfig
 link_with_backup .gitignore_global
 link_with_backup .git_commit_template
 
-link_with_backup .emacs.d
+link_with_backup  .emacs-live.el
+link_with_backup_2 emacs-live       .emacs.d
+link_with_backup_2 emacs-live-packs .emacs.d.packs
