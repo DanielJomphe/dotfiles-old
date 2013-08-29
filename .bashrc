@@ -26,7 +26,7 @@ alias mvn="nice mvn"
 alias lein="nice lein"
 alias cp="cp -v"
 alias mv="mv -v"
-alias tree="tree -F --dirsfirst"
+alias tree="tree -CF --dirsfirst"
 if ls --color >/dev/null 2>/dev/null; then
     alias ls="ls -bFk --color=auto"
 else
@@ -126,7 +126,7 @@ if [[ $MACHTYPE = *darwin* ]]; then
 
     alias cwd="pwd | pbcopy" # copies pwd to clipboard
     alias gowd='cd "`pbpaste`"' # opens pasted dir in new window
-    alias preview='groff -Tps > /tmp/tmp.ps && open -a Preview /tmp/tmp.ps' # pipe to preview 
+    alias preview='groff -Tps > /tmp/tmp.ps && open -a Preview /tmp/tmp.ps' # pipe to preview
 
     cdf () { # cd to the dir shown in top-most Finder window # I may have broken this one; let's google it if that's the case.
        currFolderPath=$( /usr/bin/osascript <<<

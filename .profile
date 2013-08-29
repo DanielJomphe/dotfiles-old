@@ -25,8 +25,11 @@ exists() {
 #export ALTERNATE_EDITOR=emacs
 export EDITOR=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
 #export VISUAL=$(type -P emacsclient || type -P emacs || type -P vim || type -P vi || type -P nano)
-alias emacs="emacsclient -n"
+#alias emacs="emacsclient -n"
 #alias emacs="/usr/local/Cellar/emacs/24.1/Emacs.app/Contents/MacOS/Emacs -nw"
+alias e=emacsclient -t
+alias ec=emacsclient -c
+alias ed=emacs --daemon
 
 #-------------------------#
 # ENVIRONMENT - LOCALE    #
@@ -60,4 +63,3 @@ export MANPAGER=$PAGER
     source "$HOME/.profile.local"
 
 [ "$BASH_VERSION" -a -z "$POSIXLY_CORRECT" ] && source "$HOME/.bashrc"
-
