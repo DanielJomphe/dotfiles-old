@@ -1,9 +1,8 @@
 [submodule "emacs-live"]
 	path = emacs-live
 	url = https://github.com/overtone/emacs-live.git
-[submodule "emacs-live-packs/samaaron-pack"]
-	path = emacs-live-packs/samaaron-pack
-	url = https://github.com/samaaron/samaaron-pack.git
+	branch = master
 [submodule "emacs-live-packs/danieljomphe-pack"]
 	path = emacs-live-packs/danieljomphe-pack
 	url = https://github.com/DanielJomphe/danieljomphe-pack.git
+	branch = master
