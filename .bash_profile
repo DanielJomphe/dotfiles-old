@@ -9,11 +9,9 @@ source $HOME/.profile
 
 # What follows is bash-specific stuff.
 
-# (Also compatible with zsh, if I'm ever tempted by it.)
-if [ -f `brew --prefix`/etc/autojump ]; then
-  . `brew --prefix`/etc/autojump
-fi
-# Obviously, this is for bash only. (zsh is much better in this area.)
+# Add the following line to ~/.zshrc if you use ZSH
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
