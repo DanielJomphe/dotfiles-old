@@ -355,3 +355,15 @@ int main(int argc, const char* argv[]) {
 # STARTUP APPLICATIONS    #
 #-------------------------#
 
+# PYTHON
+
+# http://hackercodex.com/guide/python-virtualenv-on-mac-osx-mountain-lion-10.8/
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+# and provide `syspip` for when times call for a global pip call
+syspip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+alias syspip-upgrade="syspip install --upgrade pip setuptools virtualenv"
