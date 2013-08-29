@@ -1,0 +1,7 @@
+.lein/.jline-warn
+.lein/bin
+.lein/clojars
+.lein/plugins
+.lein/profiles.clj
+.lein/self-installs
+.lein/repl-history

@@ -1,5 +1,10 @@
-.DS_Store
+.#*
+._*
 *.*~
 \#*#
-.#*
-
+.AppleDouble
+.DS_Store
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon

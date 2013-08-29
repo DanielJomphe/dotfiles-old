@@ -83,7 +83,7 @@
 	brm = branch --merged
 	brnm = branch --no-merged
 	rnc = revert --no-commit
-	com = checkout master 
+	com = checkout master
 	hard = reset --hard
 	me = merge --no-commit --no-ff
 	ls = ls-files
@@ -101,3 +101,10 @@
 	tags = tag -n1 -l
 
 # http://stackoverflow.com/questions/267761/what-does-your-gitconfig-contain
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
